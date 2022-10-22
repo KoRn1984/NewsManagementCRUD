@@ -44,6 +44,10 @@
 						<c:param name="newsId" value="${theNews.id}" />
 					</c:url>
 					
+					<c:url var="unpublishLink" value="/news/unpublish">
+						<c:param name="newsId" value="${theNews.id}" />
+					</c:url>
+					
 					<c:url var="deleteLink" value="/news/delete">
 						<c:param name="newsId" value="${theNews.id}" />
 					</c:url>
@@ -61,7 +65,8 @@
 					<div class="news-link-to-wrapper">
 						<div class="link-position">
 							<a href="${editLink}"><spring:message code="local.loc.name.edit"/></a> &nbsp
-							<a href="${viewLink}"><spring:message code="local.loc.name.view"/></a> &nbsp
+							<a href="${viewLink}"><spring:message code="local.loc.name.view"/></a><br/><br/>
+							<a href="${unpublishLink}"><spring:message code="local.loc.name.unpublish"/></a> &nbsp
 							<a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this news?'))) return false"><spring:message code="local.loc.name.delete"/></a>
 						</div>
 					<%--	<form:checkboxes path="idNews"

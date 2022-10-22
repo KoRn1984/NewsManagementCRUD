@@ -16,6 +16,7 @@ import by.itacademy.matveenko.jd2.service.ServiceException;
 @Service
 public class NewsService implements INewsService {
 	private static final String PUBLISHED = "yes";
+	//private static final String UNPUBLISHED = "no";
 	private static final int ID_ADMIN_ROLE = 43;
 
 	@Autowired
@@ -34,12 +35,10 @@ public class NewsService implements INewsService {
 	@Transactional
 	@Override
 	public void save(News news) throws ServiceException {
-		try {
-			//news.setId(190);
+		try {			
 			news.setDate(LocalDate.now());
 			news.setPublished(PUBLISHED);
 			news.setAuthor(ID_ADMIN_ROLE);
-			System.out.println(news);		
 			newsDao.saveNews(news);		
 		} catch (NewsDaoException e) {
 			throw new ServiceException(e);
@@ -51,6 +50,16 @@ public class NewsService implements INewsService {
 	public News findById(int idNews) throws ServiceException {
 		try {
 			return newsDao.fetchById(idNews);
+		} catch (NewsDaoException e) {
+			throw new ServiceException(e);
+		}
+	}
+	
+	@Transactional
+	@Override
+	public void unpublishNewsById(int idNews) throws ServiceException {
+		try {			
+			newsDao.unpublishNews(idNews);		
 		} catch (NewsDaoException e) {
 			throw new ServiceException(e);
 		}

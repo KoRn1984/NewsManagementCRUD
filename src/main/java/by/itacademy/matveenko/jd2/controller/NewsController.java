@@ -71,6 +71,16 @@ public class NewsController {
 			return "error";
 		}
 	}
+	
+	@GetMapping("/unpublish")
+	public String unpublishNews(@RequestParam("newsId") int idNews) {
+		try {			
+			newsService.unpublishNewsById(idNews);
+			return "redirect:/news/list";
+		} catch (ServiceException e) {
+			return "error";
+		}
+	}
 
 	@GetMapping("/delete")
 	public String deleteNews(@RequestParam("newsId") int idNews) {
