@@ -73,7 +73,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteNews(@RequestParam("newsId") String[] idNews) {
+	public String deleteNews(@RequestParam("newsId") int idNews) {
 		try {			
 			newsService.deleteNewsById(idNews);
 			return "redirect:/news/list";

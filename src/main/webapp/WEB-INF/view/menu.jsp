@@ -5,13 +5,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href=<c:url value="/resources/styles/newsStyle.css"/> />
+<link rel="javascript" type="text/javascript" href=<c:url value="/resources/scripts/validation.js"/> />
+</html>
 <div class="menu-wrapper">
 	<div class="menu-title-wrapper">
 		<div class="menu-title"><spring:message code="local.loc.name.newses"/></div>
 	</div>
 	<div class="list-menu-invisible-wrapper">
 		<div class="list-menu-wrapper" style="float: right;">
-			<ul style="list-style-image: url(images/img.jpg); text-align: left;">
+			<ul style="list-style-image: url(/news-management-spring/resources/images/img.jpg); text-align: left;">
 				<li style="padding-left: 15px;">				
 				<a href="list"><spring:message code="local.loc.name.newsList"/></a><br />
 				</li>				

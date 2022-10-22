@@ -13,13 +13,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <style>
    body {
-  background: #eeeeee url(resources/images/newsBackground.jpg) no-repeat center center fixed;
+  background: #eeeeee url(/news-management-spring/resources/images/newsBackground.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src= resources/images/newsBackground.jpg', sizingMethod='scale')";
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='. resources/images/newsBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src= /news-management-spring/resources/images/newsBackground.jpg', sizingMethod='scale')";
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='. /news-management-spring/resources/images/newsBackground.jpg', sizingMethod='scale');
 }
  </style>
 <link rel="stylesheet" type="text/css" href=<c:url value="/resources/styles/newsStyle.css"/> />

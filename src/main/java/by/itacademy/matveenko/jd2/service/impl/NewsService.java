@@ -1,6 +1,5 @@
 package by.itacademy.matveenko.jd2.service.impl;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +15,8 @@ import by.itacademy.matveenko.jd2.service.ServiceException;
 
 @Service
 public class NewsService implements INewsService {
+	private static final String PUBLISHED = "yes";
+	private static final int ID_ADMIN_ROLE = 43;
 
 	@Autowired
 	private INewsDao newsDao;
@@ -34,9 +35,12 @@ public class NewsService implements INewsService {
 	@Override
 	public void save(News news) throws ServiceException {
 		try {
-			
-			//setDate(LocalDate.now());
-			newsDao.saveNews(news);			
+			//news.setId(190);
+			news.setDate(LocalDate.now());
+			news.setPublished(PUBLISHED);
+			news.setAuthor(ID_ADMIN_ROLE);
+			System.out.println(news);		
+			newsDao.saveNews(news);		
 		} catch (NewsDaoException e) {
 			throw new ServiceException(e);
 		}
@@ -54,7 +58,7 @@ public class NewsService implements INewsService {
 
 	@Transactional
 	@Override
-	public void deleteNewsById(String[] idNews) throws ServiceException {
+	public void deleteNewsById(int idNews) throws ServiceException {
 		try {
 			newsDao.deleteNews(idNews);
 		} catch (NewsDaoException e) {

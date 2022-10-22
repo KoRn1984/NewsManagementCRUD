@@ -8,5 +8,5 @@ public interface INewsService {
 	  List<News> newsList() throws ServiceException;
 	  News findById(int idNews) throws ServiceException;
 	  void save(News news) throws ServiceException;	  
-	  void deleteNewsById(String[] idNews) throws ServiceException;	  
+	  void deleteNewsById(int idNews) throws ServiceException;	  
 	}

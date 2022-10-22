@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="news")
@@ -24,7 +21,7 @@ public class News implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private Integer id;
+	private int id;
 	
 	@Column(name="title")
 	private String title;
@@ -35,13 +32,12 @@ public class News implements Serializable {
 	@Column(name="content")
 	private String content;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="date")
 	private LocalDate date;
 	
-	//@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})   
-	//@JoinColumn(name="reporter")
 	@Column(name="reporter")
-	private String author;
+	private Integer author;
 	
 	@Column(name="published")
 	private String published;
@@ -49,11 +45,11 @@ public class News implements Serializable {
 	public News() {
 	}	
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -89,11 +85,11 @@ public class News implements Serializable {
 		this.date = date;
 	}
 
-	public String getAuthor() {
+	public Integer getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(Integer author) {
 		this.author = author;
 	}
 	
@@ -112,7 +108,7 @@ public class News implements Serializable {
 			this.newNews = new News();
 		}
 
-		public Builder withId(Integer id) {
+		public Builder withId(int id) {
 			newNews.setId(id);
 			return this;
 		}
@@ -137,7 +133,7 @@ public class News implements Serializable {
 			return this;
 		}
 
-		public Builder withAuthor(String author) {
+		public Builder withAuthor(Integer author) {
 			newNews.setAuthor(author);
 			return this;
 		}

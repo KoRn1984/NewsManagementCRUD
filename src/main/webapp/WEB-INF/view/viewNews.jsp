@@ -33,12 +33,12 @@
 <fmt:message bundle="${loc}" key="local.loc.name.modalExecute" var="modalExecute" />
 
 <div class="body-title">
-	<a href="list">${newses} >> </a>${news_view}
+	<a href="list"><spring:message code="local.loc.name.newses"/> >> </a><spring:message code="local.loc.name.newsView"/>
 </div>
 <div class="add-table-margin">
 	<table class="news_text_format">
 		<tr>
-			<td class="space_around_title_text">${title}:</td>
+			<td class="space_around_title_text"><spring:message code="local.loc.name.title"/>:</td>
 			<td class="space_around_view_text">
 			<div class="word-breaker">
 			<strong>
@@ -48,7 +48,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="space_around_title_text">${date}:</td>
+			<td class="space_around_title_text"><spring:message code="local.loc.name.date"/>:</td>
 			<td class="space_around_view_text">
 			<div class="word-breaker">			
 			    <fmt:parseDate value="${newsView.date}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
@@ -58,7 +58,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="space_around_title_text">${brief}:</td>
+			<td class="space_around_title_text"><spring:message code="local.loc.name.brief"/>:</td>
 			<td class="space_around_view_text">
 			<div class="word-breaker">
 				<c:out value="${newsView.brief}" />
@@ -66,7 +66,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="space_around_title_text">${content}:</td>
+			<td class="space_around_title_text"><spring:message code="local.loc.name.content"/>:</td>
 			<td class="space_around_view_text">
 			<div class="word-breaker">
 				<c:out value="${newsView.content}" />
@@ -80,7 +80,7 @@
 	<form:form action="saveNews" method="POST" modelAttribute="newsEdit">		
 	<form:hidden path="id" />
 		<input type="hidden" name="id" value="${news.id}" />
-		<button type="submit" class="btn btn-warning" value="${edit}">${edit}</button>
+		<button type="submit" class="btn btn-warning" value="<spring:message code="local.loc.name.edit"/>"><spring:message code="local.loc.name.edit"/></button>
 	</form:form>
 </div>
 <br/><br/>

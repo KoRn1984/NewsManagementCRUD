@@ -39,33 +39,28 @@
 </head>
 <body>
 <div class="body-title">
-<a href="list">${newses} >> </a>${edit_news}
+<a href="list"><spring:message code="local.loc.name.newses"/> >> </a><spring:message code="local.loc.name.editNews"/>
 </div>
 <div class="add-table-margin">
 <table class="news_text_format">
-<legend><b><div style="text-align:center;">${enter_text}:</div></b></legend><br />
+<legend><b><div style="text-align:center;"><spring:message code="local.loc.name.enterText"/>:</div></b></legend><br />
 <form:form action="saveNews" method="POST" modelAttribute="newsEdit">		
-	<form:hidden path="id" />
-	              						
-		<label>${title}:<br />
-		<p><textarea type="text" name="title" value="" style="width: 670px; height: 40px;">${news.title}</textarea></p></label>
-		<label>${brief}:<br />
-        <p><textarea type="text" name="brief" value="" style="width: 670px; height: 60px;">${news.brief}</textarea></p></label>				
-		<label>${content}:<br />
-		<p><textarea type="text" name="content" value="" style="width: 670px; height: 140px;">${news.content}</textarea></p></label>	
+	<form:hidden path="id" />	              						
+		<label><spring:message code="local.loc.name.title"/>:<br />
+		<p><textarea type="text" name="title" value="" style="width: 670px; height: 40px;">${newsEdit.title}</textarea></p></label>
+		<label><spring:message code="local.loc.name.brief"/>:<br />
+        <p><textarea type="text" name="brief" value="" style="width: 670px; height: 60px;">${newsEdit.brief}</textarea></p></label>				
+		<label><spring:message code="local.loc.name.content"/>:<br />
+		<p><textarea type="text" name="content" value="" style="width: 670px; height: 140px;">${newsEdit.content}</textarea></p></label>	
 		<br />
-		<c:if test="${not (param.EditNewsError eq null)}">				
-			<font color="red">
-				<c:out value="${edit_news_error}" />
-			</font>
-		</c:if><br />						
-		<button type="submit" class="btn btn-info" value="${save}">${save}</button>
+		<br />						
+		<button type="submit" class="btn btn-info" value="<spring:message code="local.loc.name.save"/>"><spring:message code="local.loc.name.save"/></button>
 </form:form>
 </table>
 </div>
 <div class="cancel-button">
 		<form:form action="list" method="POST" modelAttribute="newsEdit">		     	          
-		     <button type="submit" class="btn btn-dark" value="${cancel}">${cancel}</button>
+		     <button type="submit" class="btn btn-dark" value="<spring:message code="local.loc.name.cancel"/>"><spring:message code="local.loc.name.cancel"/></button>
 		</form:form>		
 </div>
 </body>

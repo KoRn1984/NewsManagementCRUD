@@ -1,7 +1,7 @@
 package by.itacademy.matveenko.jd2.controller;
 
 public class NewsParameter {
-	public static final String ID_NEWS = "idNews";
+	public static final String ID_NEWS = "id";
 	public static final String TITLE = "title";
 	public static final String BRIEF_NEWS = "brief";
 	public static final String CONTENT = "content";
