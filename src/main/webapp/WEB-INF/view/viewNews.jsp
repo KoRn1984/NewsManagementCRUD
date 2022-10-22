@@ -15,23 +15,6 @@
 <link rel="javascript" type="text/javascript" href=<c:url value="/resources/scripts/validation.js"/> />
 </head>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />    
-<fmt:message bundle="${loc}" key="local.loc.name.newses" var="newses" />
-<fmt:message bundle="${loc}" key="local.loc.name.newsView" var="news_view" />
-<fmt:message bundle="${loc}" key="local.loc.name.title" var="title" />
-<fmt:message bundle="${loc}" key="local.loc.name.date" var="date" />
-<fmt:message bundle="${loc}" key="local.loc.name.brief" var="brief" />
-<fmt:message bundle="${loc}" key="local.loc.name.content" var="content" />
-<fmt:message bundle="${loc}" key="local.loc.name.edit" var="edit" />
-<fmt:message bundle="${loc}" key="local.loc.name.delete" var="delete" />
-<fmt:message bundle="${loc}" key="local.loc.name.unpublish" var="unpublish" />
-<fmt:message bundle="${loc}" key="local.loc.name.back" var="back" />
-<fmt:message bundle="${loc}" key="local.loc.name.modalTitle" var="modalTitle" />
-<fmt:message bundle="${loc}" key="local.loc.name.modalBody" var="modalBody" />
-<fmt:message bundle="${loc}" key="local.loc.name.modalClose" var="modalClose" />
-<fmt:message bundle="${loc}" key="local.loc.name.modalExecute" var="modalExecute" />
-
 <div class="body-title">
 	<a href="list"><spring:message code="local.loc.name.newses"/> >> </a><spring:message code="local.loc.name.newsView"/>
 </div>

@@ -5,18 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />    
-<fmt:message bundle="${loc}" key="local.loc.name.newses" var="newses" />
-<fmt:message bundle="${loc}" key="local.loc.name.editNews" var="edit_news" />
-<fmt:message bundle="${loc}" key="local.loc.name.enterText" var="enter_text" />
-<fmt:message bundle="${loc}" key="local.loc.name.title" var="title" />
-<fmt:message bundle="${loc}" key="local.loc.name.brief" var="brief" />
-<fmt:message bundle="${loc}" key="local.loc.name.content" var="content" />
-<fmt:message bundle="${loc}" key="local.loc.name.save" var="save" />
-<fmt:message bundle="${loc}" key="local.loc.name.cancel" var="cancel" />
-<fmt:message bundle="${loc}" key="local.loc.name.editNewsError" var="edit_news_error" />
-
 <!DOCTYPE html>
 <html>
 <head>
