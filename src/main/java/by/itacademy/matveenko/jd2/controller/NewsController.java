@@ -2,6 +2,8 @@ package by.itacademy.matveenko.jd2.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,16 @@ import by.itacademy.matveenko.jd2.service.ServiceException;
 @Controller
 @RequestMapping("/news")
 public class NewsController {
-	private static final int COUNT_NEWS = 5;
+	private static final int COUNT_NEWS = 5;	
+	private static final String ALL_NEWS = "allNews";
+	private static final String ADD_NEWS = "newsAdd";
+	private static final String EDIT_NEWS = "newsEdit";
+	private static final String VIEW_NEWS = "newsView";	
+	private static final String USER_ACTIVE = "active";
+	private static final String USER_NOT_ACTIVE = "not_active";
+	private static final String PAGE_NUMBER = "pageNo";
+	private static final String CURRENT_PAGE = "currentPage";
+	private static final String COUNT_PAGE = "countPage";
 
 	@Autowired
 	private INewsService newsService;
@@ -27,35 +38,47 @@ public class NewsController {
     public String basePage(Model theModel) {
         try {
         	List<News> latestNews = newsService.latestList(COUNT_NEWS);
-        	theModel.addAttribute("user_status", "not_active");
-        	theModel.addAttribute("news", latestNews);
+        	theModel.addAttribute(AttributsName.USER_STATUS, USER_NOT_ACTIVE);
+        	theModel.addAttribute(AttributsName.NEWS, latestNews);
             return "baseLayout";
         } catch (ServiceException e) {
             return "error";
         }
     }
-
+	
 	@RequestMapping("/list")
-	public String listNews(Model theModel) {
+    public String newsList(HttpServletRequest request, Model theModel) {
+    	Integer pageNumber;
+		Integer pageSize = 5;
+		Integer countPage = 0;
+		
 		try {
-			List<News> theNews = newsService.newsList();
-			theModel.addAttribute("user_status", "active");
-			theModel.addAttribute("allNews", theNews);
+			pageNumber = Integer.parseInt(request.getParameter(PAGE_NUMBER));
+		} catch (NumberFormatException e) {
+			pageNumber = 1;
+		}		
+		try {
+			List<News> newsList = newsService.newsList(pageNumber, pageSize);
+			countPage = newsService.countPage(pageSize);
+			theModel.addAttribute(AttributsName.USER_STATUS, USER_ACTIVE);
+			theModel.addAttribute(ALL_NEWS, newsList);
+			theModel.addAttribute(CURRENT_PAGE, pageNumber);
+			theModel.addAttribute(COUNT_PAGE, countPage);			
 			return "baseLayout";
 		} catch (ServiceException e) {
 			return "error";
-		}
+		}		
 	}
 
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {		
 		News theNews = new News();
-		theModel.addAttribute("newsAdd", theNews);
+		theModel.addAttribute(ADD_NEWS, theNews);
 		return "baseLayout";
 	}
 
 	@PostMapping("/saveNews")
-	public String save(@ModelAttribute("news") News theNews) {
+	public String save(@ModelAttribute(AttributsName.NEWS) News theNews) {
 		try {			
 			newsService.save(theNews);
 			return "redirect:/news/list";
@@ -65,10 +88,10 @@ public class NewsController {
 	}
 
 	@GetMapping("/showFormForEdit")
-	public String showFormForEdit(@RequestParam("newsId") int theId, Model theModel) {
+	public String showFormForEdit(@RequestParam(AttributsName.NEWS_ID) int theId, Model theModel) {
 		try {
 			News theNews = newsService.findById(theId);			
-			theModel.addAttribute("newsEdit", theNews);			
+			theModel.addAttribute(EDIT_NEWS, theNews);			
 			return "baseLayout";
 		} catch (ServiceException e) {
 			return "error";
@@ -76,10 +99,10 @@ public class NewsController {
 	}
 
 	@GetMapping("/view")
-	public String viewNews(@RequestParam("newsId") int theId, Model theModel) {
+	public String viewNews(@RequestParam(AttributsName.NEWS_ID) int theId, Model theModel) {
 		try {			
 			News theNews = newsService.findById(theId);
-			theModel.addAttribute("newsView", theNews);
+			theModel.addAttribute(VIEW_NEWS, theNews);
 			return "baseLayout";
 		} catch (ServiceException e) {
 			return "error";
@@ -87,7 +110,7 @@ public class NewsController {
 	}
 	
 	@GetMapping("/unpublish")
-	public String unpublishNews(@RequestParam("newsId") int idNews) {
+	public String unpublishNews(@RequestParam(AttributsName.NEWS_ID) int idNews) {
 		try {			
 			newsService.unpublishNewsById(idNews);
 			return "redirect:/news/list";
@@ -97,7 +120,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteNews(@RequestParam("newsId") int idNews) {
+	public String deleteNews(@RequestParam(AttributsName.NEWS_ID) int idNews) {
 		try {			
 			newsService.deleteNewsById(idNews);
 			return "redirect:/news/list";

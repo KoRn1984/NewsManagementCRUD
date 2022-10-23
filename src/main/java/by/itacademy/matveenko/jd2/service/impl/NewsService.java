@@ -34,9 +34,9 @@ public class NewsService implements INewsService {
 			
 	@Transactional
 	@Override
-	public List<News> newsList() throws ServiceException {
+	public List<News> newsList(int pageNumber, int pageSize) throws ServiceException {
 		try {
-			return newsDao.getNewsList();
+			return newsDao.getNewsList(pageNumber, pageSize);
 		} catch (NewsDaoException e) {
 			throw new ServiceException(e);
 		}
@@ -83,5 +83,19 @@ public class NewsService implements INewsService {
 		} catch (NewsDaoException e) {
 			throw new ServiceException(e);
 		}
-	}	
+	}
+	
+	@Transactional
+	@Override
+	public int countPage(int countNewsPage) throws ServiceException {
+		try {
+			int countNews = newsDao.countNews();
+			if (countNews == 0) {
+				return 0;
+			}
+			return (int) Math.ceil(countNews / (double) countNewsPage);
+		} catch (NewsDaoException e) {
+			throw new ServiceException(e);
+		}
+	}
 }
