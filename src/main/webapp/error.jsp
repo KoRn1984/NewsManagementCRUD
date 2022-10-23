@@ -5,12 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />    
-<fmt:message bundle="${loc}" key="local.loc.name.error" var="error" />
-<fmt:message bundle="${loc}" key="local.loc.name.page_error" var="page_error" />
-<fmt:message bundle="${loc}" key="local.loc.name.link_404" var="link_404" />
-
 <!DOCTYPE html>
 <html>
 <head>  
