@@ -15,9 +15,19 @@ import by.itacademy.matveenko.jd2.service.ServiceException;
 
 @Service
 public class NewsService implements INewsService {
+	private static final int COUNT_NEWS = 5;
 	private static final String PUBLISHED = "yes";
-	//private static final String UNPUBLISHED = "no";
 	private static final int ID_ADMIN_ROLE = 43;
+	
+	@Override
+	@Transactional
+	public List<News> latestList(int count) throws ServiceException {		
+		try {
+			return newsDao.getLatestList(COUNT_NEWS);
+		} catch (NewsDaoException e) {
+			throw new ServiceException(e);
+		}
+	}
 
 	@Autowired
 	private INewsDao newsDao;

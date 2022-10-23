@@ -54,7 +54,7 @@
     <spring:message code="local.loc.name.error"/>
     </h3>    
     <p><spring:message code="local.loc.name.page_error"/></p>    
-    <a href="list" class="link_404"><spring:message code="local.loc.name.link_404"/></a>
+    <a href="base_page" class="link_404"><spring:message code="local.loc.name.link_404"/></a>
   </div>
     </div>
     </div>

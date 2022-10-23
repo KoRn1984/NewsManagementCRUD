@@ -18,14 +18,28 @@ import by.itacademy.matveenko.jd2.service.ServiceException;
 @Controller
 @RequestMapping("/news")
 public class NewsController {
+	private static final int COUNT_NEWS = 5;
 
 	@Autowired
 	private INewsService newsService;
+	
+	@GetMapping("/base_page")
+    public String basePage(Model theModel) {
+        try {
+        	List<News> latestNews = newsService.latestList(COUNT_NEWS);
+        	theModel.addAttribute("user_status", "not_active");
+        	theModel.addAttribute("news", latestNews);
+            return "baseLayout";
+        } catch (ServiceException e) {
+            return "error";
+        }
+    }
 
 	@RequestMapping("/list")
 	public String listNews(Model theModel) {
 		try {
 			List<News> theNews = newsService.newsList();
+			theModel.addAttribute("user_status", "active");
 			theModel.addAttribute("allNews", theNews);
 			return "baseLayout";
 		} catch (ServiceException e) {

@@ -33,11 +33,21 @@
 		</div>
 		<div class="base-layout-wrapper">
 			<div class="menu">
-				<c:import url="/WEB-INF/view/menu.jsp" />
-			</div>			
+				<c:if test="${user_status eq 'not_active'}">				
+				    <center><h1><spring:message code="local.loc.name.welcome"/>!</h1></center>					
+				</c:if>
+				<c:if test="${user_status eq 'active'}">
+					<c:import url="/WEB-INF/view/menu.jsp" />
+				</c:if>
+			</div>						
 			<c:if test="${not (newsView eq null)}">
 				<div class="content">
 					<c:import url="/WEB-INF/view/viewNews.jsp" />
+				</div>
+			</c:if>
+			<c:if test="${not (news eq null)}">
+				<div class="content">
+					<c:import url="/WEB-INF/view/guestInfo.jsp" />
 				</div>
 			</c:if>
 			<c:if test="${not (allNews eq null)}">

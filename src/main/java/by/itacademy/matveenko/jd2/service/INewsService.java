@@ -4,7 +4,8 @@ import java.util.List;
 
 import by.itacademy.matveenko.jd2.bean.News;
 
-public interface INewsService {	  
+public interface INewsService {
+	  List<News> latestList(int count) throws ServiceException;
 	  List<News> newsList() throws ServiceException;
 	  News findById(int idNews) throws ServiceException;
 	  void save(News news) throws ServiceException;

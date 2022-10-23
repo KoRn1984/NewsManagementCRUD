@@ -16,7 +16,22 @@ public class NewsDao implements INewsDao {
 	private static final String NEWS_UNPUBLISHED = "no";
 		
 	@Autowired
-	private SessionFactory sessionFactory;	
+	private SessionFactory sessionFactory;
+	
+	private static final String SHOW_NEWS_LATEST_LIST = "from News where published=:paramPublished order by date desc";
+	@Override
+	public List<News> getLatestList(int pageSize) throws NewsDaoException {
+		try {			
+			Session currentSession = sessionFactory.getCurrentSession();			
+			Query<News> query = currentSession.createQuery(SHOW_NEWS_LATEST_LIST, News.class);
+			query.setParameter("paramPublished", NEWS_PUBLISHED);
+			query.setMaxResults(pageSize);
+			List<News> listNews = query.getResultList();
+			return listNews;
+		} catch (Exception e) {
+			throw new NewsDaoException("Something is wrong with the database", e);
+		}
+	}
 
 	private static final String SHOW_NEWS = "from News where published=:paramPublished order by date desc";
 	@Override

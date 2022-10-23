@@ -3,6 +3,6 @@
 
 <html>
 <body>
-	<c:redirect url="news/list"/>
+	<c:redirect url="news/base_page"/>
 </body>
 </html>
