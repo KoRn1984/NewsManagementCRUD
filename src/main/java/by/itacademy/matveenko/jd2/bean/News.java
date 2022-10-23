@@ -177,8 +177,8 @@ public class News implements Serializable {
                 ", brief='" + brief + '\'' +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +
-                ", author='" + author.toString() + '\'' +
-                ", published='" + published.toString() + '\'' +
+                ", author='" + author + '\'' +
+                ", published='" + published + '\'' +
                 '}';
     }	
 }
