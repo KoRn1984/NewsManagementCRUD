@@ -10,10 +10,16 @@
 		<div align="right">			    
 			<a href="?languageVar=en"><spring:message code="local.loc.name.en"/></a>&nbsp;&nbsp;
 			<a href="?languageVar=ru"><spring:message code="local.loc.name.ru"/></a><br /><br />
-			<c:url var="listLink" value="list"></c:url>			
-				<a href="${listLink}"><spring:message code="local.loc.name.signIn"/></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:if test="${user_status eq 'not_active'}">
+			<c:url var="listLink" value="list"></c:url>
+			<a href="${listLink}">
+			<button type="submit" class="badge text-bg-info" value="${listLink}"><spring:message code="local.loc.name.signIn"/></button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+			</c:if>
+			<c:if test="${user_status eq 'active'}">
 			<c:url var="latestListLink" value="base_page"></c:url>			
-				<a href="${latestListLink}"><spring:message code="local.loc.name.signOut"/></a>
+				<a href="${latestListLink}">
+				<button type="submit" class="badge text-bg-info" value="${latestListLink}"><spring:message code="local.loc.name.signOut"/></button></a>				
+			</c:if>
 		</div>
 	</div>
 </div>
