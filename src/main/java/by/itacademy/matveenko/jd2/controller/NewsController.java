@@ -73,14 +73,15 @@ public class NewsController {
 	@GetMapping("/showFormForAdd")
 	public String showFormForAdd(Model theModel) {		
 		News theNews = new News();
-		theModel.addAttribute(ADD_NEWS, theNews);
+		theModel.addAttribute(ADD_NEWS, theNews);		
 		return "baseLayout";
 	}
 
 	@PostMapping("/saveNews")
-	public String save(@ModelAttribute(AttributsName.NEWS) News theNews) {
+	public String save(@ModelAttribute(AttributsName.NEWS) News theNews, HttpServletRequest request) {
 		try {			
 			newsService.save(theNews);
+			request.getSession(true).setAttribute(AttributsName.ADD_NEWS, AttributsName.COMMAND_EXECUTED);
 			return "redirect:/news/list";
 		} catch (ServiceException e) {
 			return "error";
@@ -102,7 +103,7 @@ public class NewsController {
 	public String viewNews(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int theId, Model theModel) {
 		try {			
 			News theNews = newsService.findById(theId);
-			theModel.addAttribute(VIEW_NEWS, theNews);
+			theModel.addAttribute(VIEW_NEWS, theNews);			
 			return "baseLayout";
 		} catch (ServiceException e) {
 			return "error";
@@ -114,6 +115,7 @@ public class NewsController {
 		String[] id = request.getParameterValues(AttributsName.NEWS_ID);
 		try {			
 			newsService.unpublishNewsById(id);
+			request.getSession(true).setAttribute(AttributsName.UNPUBLISH_NEWS, AttributsName.COMMAND_EXECUTED);
 			return "redirect:/news/list";
 		} catch (ServiceException e) {
 			return "error";
@@ -121,9 +123,10 @@ public class NewsController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteNews(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int idNews) {
+	public String deleteNews(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int idNews, HttpServletRequest request) {
 		try {			
 			newsService.deleteNewsById(idNews);
+			request.getSession(true).setAttribute(AttributsName.DELETE_NEWS, AttributsName.COMMAND_EXECUTED);
 			return "redirect:/news/list";
 		} catch (ServiceException e) {
 			return "error";

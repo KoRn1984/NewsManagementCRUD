@@ -17,11 +17,37 @@
 <link rel="javascript" type="text/javascript" href=<c:url value="/resources/scripts/jquery-3.6.1.min.js"/> />
 </head>
 <body>
-<div class="body-title"></div>
+<div class="body-title">    
+	<a href="list"><spring:message code="local.loc.name.newses"/> >></a><spring:message code="local.loc.name.newsList"/>
+</div>
 <div>
 <c:url var="unpublishLink" value="/news/unpublish">
 	<c:param name="newsId" value="${theNews.id}" />
 </c:url>
+<c:if test="${sessionScope.addNews eq 'command_executed'}">
+	   <div class="alert alert-primary" role="alert">
+	     <div style="text-align:center;"><spring:message code="local.loc.name.saveMessage"/>!</div>
+	     <c:remove var="addNews" />
+	   </div>
+	</c:if>
+	<c:if test="${sessionScope.editNews eq 'command_executed'}">
+	   <div class="alert alert-warning" role="alert">
+	     <div style="text-align:center;"><spring:message code="local.loc.name.updateMessage"/>!</div>
+	     <c:remove var="editNews" />
+	   </div>
+	</c:if>	
+    <c:if test="${sessionScope.unpublishNews eq 'command_executed'}">
+	   <div class="alert alert-info" role="alert">
+	     <div style="text-align:center;"><spring:message code="local.loc.name.unpublishMessage"/>!</div>
+	     <c:remove var="unpublishNews" />
+	   </div>
+	</c:if>	    
+	<c:if test="${sessionScope.deleteNews eq 'command_executed'}">
+	   <div class="alert alert-danger" role="alert">
+	     <div style="text-align:center;"><spring:message code="local.loc.name.deleteMessage"/>!</div>
+	     <c:remove var="deleteNews" />
+	   </div>
+	</c:if>		
 <form:form action="${unpublishLink}" method="get">
 		<c:forEach var="theNews" items="${allNews}">
 			<div class="single-news-wrapper">

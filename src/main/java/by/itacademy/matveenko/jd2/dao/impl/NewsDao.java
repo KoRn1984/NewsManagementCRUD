@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import by.itacademy.matveenko.jd2.bean.News;
+import by.itacademy.matveenko.jd2.controller.AttributsName;
 import by.itacademy.matveenko.jd2.dao.INewsDao;
 import by.itacademy.matveenko.jd2.dao.NewsDaoException;
 
@@ -79,7 +80,7 @@ public class NewsDao implements INewsDao {
 			for (String id : idNews) {
 			Query query = currentSession.createQuery(UNPUBLISH_NEWS);
 			query.setParameter("paramPublished", NEWS_UNPUBLISHED);
-	        query.setParameter("id", Integer.parseInt(id));
+	        query.setParameter(AttributsName.NEWS_ID, Integer.parseInt(id));
 			query.executeUpdate();
 			}
 		} catch (Exception e) {

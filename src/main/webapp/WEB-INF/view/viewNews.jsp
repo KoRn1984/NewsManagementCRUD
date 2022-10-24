@@ -58,47 +58,22 @@
 		</tr>
 	</table>
 </div>
-<c:if test="${sessionScope.role eq 'admin'}">
 <div align="right" class="first-view-button">
-	<form:form action="saveNews" method="POST" modelAttribute="newsEdit">		
-	<form:hidden path="id" />
-		<input type="hidden" name="id" value="${news.id}" />
-		<button type="submit" class="btn btn-warning" value="<spring:message code="local.loc.name.edit"/>"><spring:message code="local.loc.name.edit"/></button>
-	</form:form>
+	<c:url var="editLink" value="/news/showFormForEdit?newsId=${requestScope.newsView.id}"></c:url>
+        <a href="${editLink}">
+        <button type="submit" class="btn btn-warning"><spring:message code="local.loc.name.edit"/></button></a>
 </div>
 <br/><br/>
 <div align="right" class="second-view-button">
-	<form action="controller" method="post">
-		<input type="hidden" name="command" value="do_unpublish_news" />
-		<input type="hidden" name="id" value="${news.id}" />
-		<button type="submit" class="btn btn-primary">${unpublish}</button>	
-	</form>
+	<c:url var="unpublishLink" value="/news/unpublish?id=${requestScope.newsView.id}"></c:url>
+        <a href="${unpublishLink}">
+        <button type="submit" class="btn btn-primary"><spring:message code="local.loc.name.unpublish"/></button></a>
 </div>
 <div align="left" class="third-view-button">
-	<form action="controller" method="post">
-		<input type="hidden" name="command" value="do_delete_news" />
-		<input type="hidden" name="id" value="${news.id}" />		
-		<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="${delete}">${delete}</button>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">        
-        <h2 class="modal-title" id="staticBackdropLabel"><strong>${modalTitle}</strong></h2>        
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>      
-      <h5 class="modal-body" style="text-align:center;">${modalBody}</h5>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${modalClose}</button>
-        <button type="submit" class="btn btn-primary" value="${unpublish}">${modalExecute}</button>
-      </div>
-    </div>
-  </div>
+	<c:url var="deleteLink" value="/news/delete?newsId=${requestScope.newsView.id}"></c:url>
+        <a href="${deleteLink}">	
+		<button type="button" class="btn btn-danger" onclick="if (!(confirm('<spring:message code="local.loc.name.modalBody"/>'))) return false"><spring:message code="local.loc.name.delete"/></button></a>
 </div>
-<!-- Modal -->
-</form>
-</div>
-</c:if>
 <br /><br />
 <div align="center" class="cancel-button">
 	<form:form action="javascript:history.back()" method="POST" modelAttribute="newsView">

@@ -47,7 +47,7 @@
 </table>
 </div>
 <div class="cancel-button">
-		<form:form action="javascript:history.back()" method="POST" modelAttribute="newsEdit">		     	          
+		<form:form action="list" method="POST" modelAttribute="newsEdit">		     	          
 		     <button type="submit" class="btn btn-dark" value="<spring:message code="local.loc.name.cancel"/>"><spring:message code="local.loc.name.cancel"/></button>
 		</form:form>		
 </div>
