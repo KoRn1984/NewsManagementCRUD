@@ -29,7 +29,7 @@ public class NewsDao implements INewsDao {
 			List<News> listNews = query.getResultList();
 			return listNews;
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong with the database", e);
+			throw new NewsDaoException("Something is wrong with the database!", e);
 		}
 	}
 
@@ -46,7 +46,7 @@ public class NewsDao implements INewsDao {
 			List<News> listNews = query.getResultList();
 			return listNews;
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong with the database", e);
+			throw new NewsDaoException("Something is wrong with the database!", e);
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class NewsDao implements INewsDao {
 			News news = currentSession.get(News.class, idNews);
 			return news;
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong. Could not find news.", e);
+			throw new NewsDaoException("Something is wrong. Could not find news!", e);
 		}
 	}
 
@@ -67,21 +67,23 @@ public class NewsDao implements INewsDao {
 			Session currentSession = sessionFactory.getCurrentSession();
 			currentSession.saveOrUpdate(news);
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong. Failed to save news", e);
+			throw new NewsDaoException("Something is wrong. Failed to save news!", e);
 		}
 	}
 	
 	private static final String UNPUBLISH_NEWS = "update News set published=:paramPublished where id=:id";
 	@Override
-	public void unpublishNews(int idNews) throws NewsDaoException {
+	public void unpublishNews(String[] idNews) throws NewsDaoException {
 		try {			
 			Session currentSession = sessionFactory.getCurrentSession();
+			for (String id : idNews) {
 			Query query = currentSession.createQuery(UNPUBLISH_NEWS);
 			query.setParameter("paramPublished", NEWS_UNPUBLISHED);
-	        query.setParameter("id", idNews);
+	        query.setParameter("id", Integer.parseInt(id));
 			query.executeUpdate();
+			}
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong. Failed to unpublish news", e);
+			throw new NewsDaoException("Something is wrong. Failed to unpublish news!", e);
 		}
 	}
 	
@@ -94,7 +96,7 @@ public class NewsDao implements INewsDao {
 			query.setParameter("id", idNews);
 			query.executeUpdate();
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong. Could not delete news.", e);
+			throw new NewsDaoException("Something is wrong. Could not delete news!", e);
 		}
 	}
 	
@@ -108,7 +110,7 @@ public class NewsDao implements INewsDao {
 	        int count = ((Number)query.uniqueResult()).intValue();
 	        return count;
 		} catch (Exception e) {
-			throw new NewsDaoException("Something is wrong. Could not delete news.", e);
+			throw new NewsDaoException("Something is wrong. Could not to count the number of news!", e);
 		}
 	}
 }

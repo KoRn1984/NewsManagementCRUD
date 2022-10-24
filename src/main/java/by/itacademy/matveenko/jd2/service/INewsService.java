@@ -9,7 +9,7 @@ public interface INewsService {
 	  List<News> newsList(int pageNumber, int pageSize) throws ServiceException;
 	  News findById(int idNews) throws ServiceException;
 	  void save(News news) throws ServiceException;
-	  void unpublishNewsById(int idNews) throws ServiceException;
+	  void unpublishNewsById(String[] idNews) throws ServiceException;
 	  void deleteNewsById(int idNews) throws ServiceException;
 	  int countPage(int countNewsPage) throws ServiceException;
 }

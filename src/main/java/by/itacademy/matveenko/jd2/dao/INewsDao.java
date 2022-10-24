@@ -9,7 +9,7 @@ public interface INewsDao {
 	List<News> getNewsList(int pageNumber, int pageSize) throws NewsDaoException;
 	News fetchById(int idNews) throws NewsDaoException;
 	void saveNews(News news) throws NewsDaoException;
-	void unpublishNews(int idNews) throws NewsDaoException;
+	void unpublishNews(String[] idNews) throws NewsDaoException;
 	void deleteNews(int idNews) throws NewsDaoException;
 	int countNews() throws NewsDaoException;
 }

@@ -7,7 +7,7 @@
 <div class="wrapper">	
 	<div class="newstitle"><spring:message code="local.loc.name.newsManagement"/></div>
 	<div class="local-link">	
-		<div align="right">				    
+		<div align="right">			    
 			<a href="?languageVar=en"><spring:message code="local.loc.name.en"/></a>&nbsp;&nbsp;
 			<a href="?languageVar=ru"><spring:message code="local.loc.name.ru"/></a><br /><br />
 			<c:url var="listLink" value="list"></c:url>			

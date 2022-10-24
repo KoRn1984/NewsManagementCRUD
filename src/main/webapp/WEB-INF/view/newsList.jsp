@@ -18,7 +18,11 @@
 </head>
 <body>
 <div class="body-title"></div>
-<div>	
+<div>
+<c:url var="unpublishLink" value="/news/unpublish">
+	<c:param name="newsId" value="${theNews.id}" />
+</c:url>
+<form:form action="${unpublishLink}" method="get">
 		<c:forEach var="theNews" items="${allNews}">
 			<div class="single-news-wrapper">
 				<div class="single-news-header-wrapper">
@@ -26,19 +30,12 @@
 					<c:url var="editLink" value="/news/showFormForEdit">
 						<c:param name="newsId" value="${theNews.id}" />
 					</c:url>
-
 					<c:url var="viewLink" value="/news/view">
 						<c:param name="newsId" value="${theNews.id}" />
 					</c:url>
-					
-					<c:url var="unpublishLink" value="/news/unpublish">
-						<c:param name="newsId" value="${theNews.id}" />
-					</c:url>
-					
 					<c:url var="deleteLink" value="/news/delete">
 						<c:param name="newsId" value="${theNews.id}" />
 					</c:url>
-					
 					<div class="single-news-wrapper">
 						<div class="single-news-header-wrapper">
 							<strong><div class="news-title">${theNews.title}</div></strong>
@@ -48,18 +45,21 @@
 							<div class="news-content">${theNews.brief}</div>
 						</div>
 					</div>
-
 					<div class="news-link-to-wrapper">
 						<div class="link-position">
 							<a href="${editLink}"><spring:message code="local.loc.name.edit"/></a> &nbsp
-							<a href="${viewLink}"><spring:message code="local.loc.name.view"/></a><br/><br/>
-							<a href="${unpublishLink}"><spring:message code="local.loc.name.unpublish"/></a> &nbsp
-							<a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this news?'))) return false"><spring:message code="local.loc.name.delete"/></a>
+							<a href="${viewLink}"><spring:message code="local.loc.name.view"/></a>
+							<input type="checkbox" name="id" value="${theNews.id}"/><br/><br/>							
+							<a href="${deleteLink}"	onclick="if (!(confirm('<spring:message code="local.loc.name.modalBody"/>'))) return false"><spring:message code="local.loc.name.delete"/></a>
 						</div>					
 					</div>							
 				</div>
 			</div>
-		</c:forEach>
+		</c:forEach>		
+		<div class="delete-button-position">	  		
+		   <button type="submit" class="btn btn-primary" value="<spring:message code="local.loc.name.unpublish"/>"><spring:message code="local.loc.name.unpublish"/></button>		   
+	    </div>        
+        </form:form>
 	<br/><br/>
 	<div class="Page navigation">
       <c:if test="${user_status eq 'active'}">

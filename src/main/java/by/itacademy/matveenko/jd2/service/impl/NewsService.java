@@ -67,7 +67,7 @@ public class NewsService implements INewsService {
 	
 	@Transactional
 	@Override
-	public void unpublishNewsById(int idNews) throws ServiceException {
+	public void unpublishNewsById(String[] idNews) throws ServiceException {
 		try {			
 			newsDao.unpublishNews(idNews);		
 		} catch (NewsDaoException e) {

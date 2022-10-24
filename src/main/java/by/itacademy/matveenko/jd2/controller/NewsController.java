@@ -88,7 +88,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/showFormForEdit")
-	public String showFormForEdit(@RequestParam(AttributsName.NEWS_ID) int theId, Model theModel) {
+	public String showFormForEdit(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int theId, Model theModel) {
 		try {
 			News theNews = newsService.findById(theId);			
 			theModel.addAttribute(EDIT_NEWS, theNews);			
@@ -99,7 +99,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/view")
-	public String viewNews(@RequestParam(AttributsName.NEWS_ID) int theId, Model theModel) {
+	public String viewNews(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int theId, Model theModel) {
 		try {			
 			News theNews = newsService.findById(theId);
 			theModel.addAttribute(VIEW_NEWS, theNews);
@@ -110,9 +110,10 @@ public class NewsController {
 	}
 	
 	@GetMapping("/unpublish")
-	public String unpublishNews(@RequestParam(AttributsName.NEWS_ID) int idNews) {
+	public String unpublishNews(HttpServletRequest request) {
+		String[] id = request.getParameterValues(AttributsName.NEWS_ID);
 		try {			
-			newsService.unpublishNewsById(idNews);
+			newsService.unpublishNewsById(id);
 			return "redirect:/news/list";
 		} catch (ServiceException e) {
 			return "error";
@@ -120,7 +121,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/delete")
-	public String deleteNews(@RequestParam(AttributsName.NEWS_ID) int idNews) {
+	public String deleteNews(@RequestParam(AttributsName.NEWS_PARAMETER_ID) int idNews) {
 		try {			
 			newsService.deleteNewsById(idNews);
 			return "redirect:/news/list";

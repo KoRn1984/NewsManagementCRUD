@@ -7,7 +7,8 @@ public class AttributsName {
 	public static final String ROLE = "role";	
 	public static final String NEWS = "news";
 	public static final String NEWS_LIST = "newsList";
-	public static final String NEWS_ID = "newsId";
+	public static final String NEWS_PARAMETER_ID = "newsId";
+	public static final String NEWS_ID = "id";
 	public static final String SHOW_NEWS = "showNews";
 	public static final String DO_NOT_SHOW_NEWS = "not_show";
 	public static final String PRESENTATION = "presentation";
