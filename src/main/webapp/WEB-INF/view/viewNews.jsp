@@ -101,7 +101,7 @@
 </c:if>
 <br /><br />
 <div align="center" class="cancel-button">
-	<form:form action="list" method="POST" modelAttribute="newsView">
+	<form:form action="javascript:history.back()" method="POST" modelAttribute="newsView">
 		 <button type="submit" class="btn btn-secondary" value="<spring:message code="local.loc.name.back"/>"><spring:message code="local.loc.name.back"/></button>		
 	</form:form>
 </div>
